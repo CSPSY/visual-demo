@@ -9,7 +9,8 @@ const activeIndex = ref<string>('1');
 // 定义菜单项数组
 const menuItems = ref([
   { index: '1', label: 'webgl 基础入门', route: '/webgl/basis' },
-  { index: '2', label: '图案生成', route: '/webgl/grids' },
+  { index: '2', label: '仿射变换', route: '/webgl/transform' },
+  { index: '3', label: '图案生成', route: '/webgl/grids' },
 ]);
 
 const handleMenuSelect = (index: string) => {
@@ -22,7 +23,7 @@ const handleMenuSelect = (index: string) => {
 watch(
   () => route.fullPath,
   (fullPath) => {
-    const currentItem = menuItems.value.find(item => item.route === fullPath);
+    const currentItem = menuItems.value.find(item => fullPath.startsWith(item.route));
     if (currentItem) {
       activeIndex.value = currentItem.index;
     }
