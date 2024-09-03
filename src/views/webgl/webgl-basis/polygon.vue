@@ -190,8 +190,10 @@ const drawCurrentShape = () => {
   margin-top: 20px;
 }
 
-canvas {
+.content-canvas {
   width: 256px;
   height: 256px;
+  border: 1px solid #e5e7ec;
+  padding: 12px;
 }
 </style>

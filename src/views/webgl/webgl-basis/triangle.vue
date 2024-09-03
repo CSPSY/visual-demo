@@ -107,4 +107,9 @@ onMounted(() => {
 
   padding-top: 20px;
 }
+
+.content-canvas {
+  border: 1px solid #e5e7ec;
+  padding: 12px;
+}
 </style>
