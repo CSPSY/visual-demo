@@ -1,4 +1,18 @@
 {
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "lib": ["es6"],
+    "moduleResolution": "node",
+    "noEmit": true,
+    "target": "esnext",
+    "strict": true,
+    "noImplicitAny":true,
+    "strictNullChecks": true
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
