@@ -34,6 +34,22 @@ const routes = [
         }
     },
     {
+        path: '/webgl/transform',
+        name: 'webgl-transform',
+        component: () => import('../views/webgl/transform/view-index.vue'),
+        redirect: '/webgl/transform/particle-animation',
+        children: [
+            {
+                path: 'particle-animation',
+                name: 'particle-animation',
+                component: () => import('../views/webgl/transform/particle-animation.vue'),
+            }
+        ],
+        meta: {
+            title: '仿射变换',
+        }
+    },
+    {
         path: '/webgl/grids',
         name: 'webgl-grids',
         component: () => import('../views/webgl/grids.vue'),
