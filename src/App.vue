@@ -10,7 +10,7 @@ const activeIndex = ref<string>('1');
 const menuItems = ref([
   { index: '1', label: 'webgl 基础入门', route: '/webgl/basis' },
   { index: '2', label: '仿射变换', route: '/webgl/transform' },
-  { index: '3', label: '图案生成', route: '/webgl/grids' },
+  { index: '3', label: '图案生成', route: '/webgl/pattern' },
 ]);
 
 const handleMenuSelect = (index: string) => {

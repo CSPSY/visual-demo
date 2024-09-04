@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import particleAnimation from './particle-animation.vue';
+import grids from './grids.vue';
+import fractalPattern from './fractal-pattern.vue';
 
 const menus = [
-  { tab: 'webgl-particle-animation', name: '粒子动画', component: particleAnimation },
+  { tab: 'webgl-grids', name: '重复网格', component: grids },
+  { tab: 'webgl-fractal-pattern', name: '分形图案', component: fractalPattern }
 ];
 
 const activeTab = ref(menus[0].tab);
