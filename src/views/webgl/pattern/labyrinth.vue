@@ -29,9 +29,10 @@ const fragment = `
   
   uniform vec2 u_resolution;
   uniform int rows;
+  uniform float u_seed;    // 随机数种子，用来每次刷新页面生成新的迷宫
 
-  float random (in vec2 _st) {
-    return fract(sin(dot(_st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+  float random(in vec2 _st) {
+    return fract(sin(dot(_st.xy + u_seed, vec2(12.9898,78.233))) * 43758.5453123);
   }
 
   vec2 truchetPattern(in vec2 _st, in float _index){
@@ -74,7 +75,11 @@ onMounted(() => {
   // 编译着色器并创建程序
   const program = renderer.compileSync(fragment, vertex);
   renderer.useProgram(program);
+  // 生成一个随机种子
+  const seed = Math.random() * 1000;
+
   renderer.uniforms.rows = 20;
+  renderer.uniforms.u_seed = seed;
 
   // 设置网格数据
   renderer.setMeshData([{
