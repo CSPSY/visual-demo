@@ -35,6 +35,15 @@ const fragment = `
   // 定义一个 uniform 变量 iterations，用于控制迭代次数
   uniform int iterations;
 
+  // 定义一个函数 palette，用于计算颜色
+  vec3 palette(float t, vec3 c1, vec3 c2, vec3 c3, vec3 c4) {
+    float x = 1.0 / 3.0;
+    if (t < x) return mix(c1, c2, t/x);
+    else if (t < 2.0 * x) return mix(c2, c3, (t - x)/x);
+    else if (t < 3.0 * x) return mix(c3, c4, (t - 2.0*x)/x);
+    return c4;
+  }
+
   // 定义一个函数 f，用于计算 z 的下一个值
   vec2 f(vec2 z, vec2 c) {
     // 计算 z 的平方加上常数 c
@@ -73,6 +82,8 @@ const fragment = `
     // gl_FragColor.rgb = escaped ? vec3(float(j)) / float(iterations) : vec3(0.0);
     // gl_FragColor.rgb = escaped ? vec3(1.0) : vec3(0.0);
     gl_FragColor.rgb = escaped ? vec3(float(j)) / sqrt(float(iterations)) : vec3(0.0);
+    // gl_FragColor.rgb = escaped ? max(1.0, log(scale)) * palette(float(j)/ float(iterations), vec3(0.02, 0.02, 0.03), vec3(0.1, 0.2, 0.3), vec3(0.0, 0.3, 0.2), vec3(0.0, 0.5, 0.8))
+    //          : vec3(0.0);
 
     // 设置片段的 alpha 值为 1.0（完全不透明）
     gl_FragColor.a = 1.0;
@@ -119,6 +130,14 @@ onMounted(() => {
 
   // 渲染网格
   renderer.render();
+
+  // function update() {
+  //   const factor = Math.max(0.1, Math.log(renderer.uniforms.scale));
+  //   renderer.uniforms.scale = (renderer.uniforms.scale += factor) % 10000;
+  //   renderer.uniforms.iterations = factor * 500;
+  //   requestAnimationFrame(update);
+  // }
+  // setTimeout(update, 2000);
 });
 </script>
 

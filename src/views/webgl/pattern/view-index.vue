@@ -2,10 +2,12 @@
 import { ref } from 'vue';
 import grids from './grids.vue';
 import fractalPattern from './fractal-pattern.vue';
+import labyrinth from './labyrinth.vue';
 
 const menus = [
   { tab: 'webgl-grids', name: '重复网格', component: grids },
-  { tab: 'webgl-fractal-pattern', name: '分形图案', component: fractalPattern }
+  { tab: 'webgl-fractal-pattern', name: '分形图案', component: fractalPattern },
+  { tab: 'webgl-labyrinth', name: '迷宫', component: labyrinth },
 ];
 
 const activeTab = ref(menus[0].tab);
