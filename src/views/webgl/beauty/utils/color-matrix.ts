@@ -1,24 +1,15 @@
 import {clamp} from './math.ts';
 
-export const transformColor = (color, ...matrix) => {
-  const [r, g, b, a] = color;
-  matrix = matrix.reduce((m1, m2) => multiply(m1, m2));
-  color[0] = matrix[0] * r + matrix[1] * g + matrix[2] * b + matrix[3] * a + matrix[4];
-  color[1] = matrix[5] * r + matrix[6] * g + matrix[7] * b + matrix[8] * a + matrix[9];
-  color[2] = matrix[10] * r + matrix[11] * g + matrix[12] * b + matrix[13] * a + matrix[14];
-  color[3] = matrix[15] * r + matrix[16] * g + matrix[17] * b + matrix[18] * a + matrix[19];
-  return color;
-}
-
-export const multiply = (a, b) => {
-  const out = [];
-  const a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3], a04 = a[4]; // eslint-disable-line one-var-declaration-per-line
-  const a10 = a[5], a11 = a[6], a12 = a[7], a13 = a[8], a14 = a[9]; // eslint-disable-line one-var-declaration-per-line
-  const a20 = a[10], a21 = a[11], a22 = a[12], a23 = a[13], a24 = a[14]; // eslint-disable-line one-var-declaration-per-line
-  const a30 = a[15], a31 = a[16], a32 = a[17], a33 = a[18], a34 = a[19]; // eslint-disable-line one-var-declaration-per-line
+// multiply 函数，用于矩阵乘法
+export const multiply = (a: number[], b: number[]): number[] => {
+  const out: number[] = [];
+  const a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3], a04 = a[4];
+  const a10 = a[5], a11 = a[6], a12 = a[7], a13 = a[8], a14 = a[9];
+  const a20 = a[10], a21 = a[11], a22 = a[12], a23 = a[13], a24 = a[14];
+  const a30 = a[15], a31 = a[16], a32 = a[17], a33 = a[18], a34 = a[19];
 
   // Cache only the current line of the second matrix
-  let b0 = b[0], b1 = b[1], b2 = b[2], b3 = b[3], b4 = b[4]; // eslint-disable-line one-var-declaration-per-line
+  let b0 = b[0], b1 = b[1], b2 = b[2], b3 = b[3], b4 = b[4];
   out[0] = b0 * a00 + b1 * a10 + b2 * a20 + b3 * a30;
   out[1] = b0 * a01 + b1 * a11 + b2 * a21 + b3 * a31;
   out[2] = b0 * a02 + b1 * a12 + b2 * a22 + b3 * a32;
@@ -49,16 +40,21 @@ export const multiply = (a, b) => {
   return out;
 }
 
-// export const transformColor(color, m) => {
-//   const [r, g, b, a] = color;
+// transformColor 函数，用于颜色变换
+export const transformColor = (color: number[], ...matrix: number[][]): number[] => {
+  const [r, g, b, a] = color;
 
-//   color[0] = m[0] * r + m[1] * g + m[2] * b + m[3] * a + m[4];
-//   color[1] = m[5] * r + m[6] * g + m[7] * b + m[8] * a + m[9];
-//   color[2] = m[10] * r + m[11] * g + m[12] * b + m[13] * a + m[14];
-//   color[3] = m[15] * r + m[16] * g + m[17] * b + m[18] * a + m[19];
+  // 将多个矩阵相乘
+  const combinedMatrix = matrix.reduce((m1, m2) => multiply(m1, m2));
 
-//   return color;
-// }
+  // 应用矩阵变换
+  color[0] = combinedMatrix[0] * r + combinedMatrix[1] * g + combinedMatrix[2] * b + combinedMatrix[3] * a + combinedMatrix[4];
+  color[1] = combinedMatrix[5] * r + combinedMatrix[6] * g + combinedMatrix[7] * b + combinedMatrix[8] * a + combinedMatrix[9];
+  color[2] = combinedMatrix[10] * r + combinedMatrix[11] * g + combinedMatrix[12] * b + combinedMatrix[13] * a + combinedMatrix[14];
+  color[3] = combinedMatrix[15] * r + combinedMatrix[16] * g + combinedMatrix[17] * b + combinedMatrix[18] * a + combinedMatrix[19];
+
+  return color;
+}
 
 export const grayscale = (p: number) => {
   p = clamp(0, 1, p);

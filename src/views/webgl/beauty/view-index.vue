@@ -2,10 +2,12 @@
 import { ref } from 'vue';
 import grayscale from './grayscale.vue';
 import channel from './channel.vue';
+import gaussian from './gaussian.vue';
 
 const menus = [
   { tab: 'webgl-grayscale', name: '灰度化', component: grayscale },
-  { tab: 'webgl-channel', name: 'channel', component: channel }
+  { tab: 'webgl-channel', name: 'channel', component: channel },
+  { tab: 'webgl-gaussian', name: '高斯模糊', component: gaussian },
 ];
 
 const activeTab = ref(menus[0].tab);
