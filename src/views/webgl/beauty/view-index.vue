@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import grayscale from './grayscale.vue';
+import channel from './channel.vue';
 
 const menus = [
   { tab: 'webgl-grayscale', name: '灰度化', component: grayscale },
+  { tab: 'webgl-channel', name: 'channel', component: channel }
 ];
 
 const activeTab = ref(menus[0].tab);

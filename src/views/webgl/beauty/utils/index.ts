@@ -37,7 +37,7 @@ export const getImageData = (img: HTMLImageElement, rect = [0, 0, img.width, img
 }
 
 // 循环遍历 imageData 数据
-export function traverse(imageData: ImageData, pass: (params: any) => any): ImageData {
+export const traverse = (imageData: ImageData, pass: (params: any) => any): ImageData => {
   // 解构 imageData 对象，获取宽度、高度和数据
   const { width, height, data } = imageData;
 
@@ -62,4 +62,22 @@ export function traverse(imageData: ImageData, pass: (params: any) => any): Imag
 
   // 返回修改后的 imageData 对象
   return imageData;
+}
+
+// 创建高斯矩阵
+export const gaussianMatrix = (radius: number, sigma = radius / 3) => {
+  const a = 1 / (Math.sqrt(2 * Math.PI) * sigma);
+  const b = -1 / (2 * sigma ** 2);
+  let sum = 0;
+  const matrix = [];
+  for(let x = -radius; x <= radius; x++) {
+    const g = a * Math.exp(b * x ** 2);
+    matrix.push(g);
+    sum += g;
+  }
+
+  for(let i = 0, len = matrix.length; i < len; i++) {
+    matrix[i] /= sum;
+  }
+  return {matrix, sum};
 }
