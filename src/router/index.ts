@@ -35,6 +35,14 @@ const routes = [
         meta: {
             title: '图案生成',
         }
+    },
+    {
+        path: '/webgl/beauty',
+        name: 'webgl-beauty',
+        component: () => import('../views/webgl/beauty/view-index.vue'),
+        meta: {
+            title: '图案美化',
+        }
     }
 ];
 
@@ -43,7 +51,7 @@ const router = createRouter({
     routes
 });
 
-router.beforeEach(async (to, from) => {
+router.beforeEach(async (to) => {
     // 路由发送变化时，更改页面 title
     if (to.meta.title) {
         document.title = '3d | ' + to.meta.title
